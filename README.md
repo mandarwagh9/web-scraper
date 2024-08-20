@@ -43,16 +43,6 @@ This project is a Flask-based web application designed to scrape various types o
     pip install -r requirements.txt
     ```
 
-### Requirements
-
-Create a `requirements.txt` file with the following content:
-
-```
-Flask
-requests
-beautifulsoup4
-```
-
 ## Usage
 
 1. **Run the Flask application:**
