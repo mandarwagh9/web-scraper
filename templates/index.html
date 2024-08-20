@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            margin: 5px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            font-size: 18px;
+        }
+        .popup.show {
+            display: block;
+        }
+        .popup button.close {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function updateFields() {
+            const selectedOptions = document.querySelectorAll('input[type="checkbox"]:checked');
+            const textFields = document.getElementById('text-fields');
+            const linksFields = document.getElementById('links-fields');
+            const imagesFields = document.getElementById('images-fields');
+            const videosFields = document.getElementById('videos-fields');
+            const audioFields = document.getElementById('audio-fields');
+            const documentsFields = document.getElementById('documents-fields');
+
+            textFields.classList.add('hidden');
+            linksFields.classList.add('hidden');
+            imagesFields.classList.add('hidden');
+            videosFields.classList.add('hidden');
+            audioFields.classList.add('hidden');
+            documentsFields.classList.add('hidden');
+
+            selectedOptions.forEach(option => {
+                const value = option.value;
+                if (value === 'text') textFields.classList.remove('hidden');
+                if (value === 'links') linksFields.classList.remove('hidden');
+                if (value === 'images') imagesFields.classList.remove('hidden');
+                if (value === 'videos') videosFields.classList.remove('hidden');
+                if (value === 'audio') audioFields.classList.remove('hidden');
+                if (value === 'documents') documentsFields.classList.remove('hidden');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Web Scraper</h1>
+        <form action="/scrape" method="post">
+            <input type="text" name="url" placeholder="Enter the website URL" required>
+
+            <div class="form-group">
+                <label><input type="checkbox" name="text" value="text" onchange="updateFields()"> Text</label>
+                <label><input type="checkbox" name="links" value="links" onchange="updateFields()"> Links</label>
+                <label><input type="checkbox" name="images" value="images" onchange="updateFields()"> Images</label>
+                <label><input type="checkbox" name="videos" value="videos" onchange="updateFields()"> Videos</label>
+                <label><input type="checkbox" name="audio" value="audio" onchange="updateFields()"> Audio</label>
+                <label><input type="checkbox" name="documents" value="documents" onchange="updateFields()"> Documents</label>
+            </div>
+
+            <div id="text-fields" class="hidden form-group">
+                <input type="text" name="text_folder" placeholder="Folder for text files (optional)">
+            </div>
+            <div id="links-fields" class="hidden form-group">
+                <input type="text" name="links_folder" placeholder="Folder for links (optional)">
+            </div>
+            <div id="images-fields" class="hidden form-group">
+                <input type="text" name="images_folder" placeholder="Folder for images (optional)">
+            </div>
+            <div id="videos-fields" class="hidden form-group">
+                <input type="text" name="videos_folder" placeholder="Folder for videos (optional)">
+            </div>
+            <div id="audio-fields" class="hidden form-group">
+                <input type="text" name="audio_folder" placeholder="Folder for audio (optional)">
+            </div>
+            <div id="documents-fields" class="hidden form-group">
+                <input type="text" name="documents_folder" placeholder="Folder for documents (optional)">
+            </div>
+
+            <button type="submit">Start Scraping</button>
+        </form>
+
+        <div class="popup {{ 'show' if success else '' }}">
+            <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+            <p>Scrape Done!</p>
+        </div>
+    </div>
+</body>
+</html>
