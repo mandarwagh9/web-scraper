@@ -105,7 +105,7 @@ beautifulsoup4==4.12.2
 
 ## Example
 
-![Example Screenshot](https://via.placeholder.com/700x400.png?text=Example+Screenshot)
+![Example Screenshot](https://github.com/mandarwagh9/web-scraper/blob/main/webscraper.PNG?raw=true)
 
 ## Contributing
 
