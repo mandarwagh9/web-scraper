@@ -26,8 +26,8 @@ This project is a Flask-based web application designed to scrape various types o
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/mandarwagh9/vadapav-mov-link-scrape.git
-    cd vadapav-mov-link-scrape
+    git clone https://github.com/mandarwagh/web-scraper
+    cd web-scraper
     ```
 
 2. **Create and activate a virtual environment (optional but recommended):**
